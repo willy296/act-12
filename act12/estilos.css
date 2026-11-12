@@ -1,0 +1,140 @@
+* { box-sizing: border-box; }
+[v-cloak] { display: none; }
+
+/* Colores para el tema claro y los controles nativos */
+.contenedor {
+ --fondo: #f1f5f9;
+ --texto: #172033;
+ --superficie: #ffffff;
+ --borde-campo: #64748b;
+ --campo-fondo: #ffffff;
+ --boton-sec-fondo: #e2e8f0;
+ --boton-sec-texto: #172033;
+ --foco: #b45309;
+ color-scheme: light;
+}
+
+.contenedor.oscuro {
+ --fondo: #0f172a;
+ --texto: #f1f5f9;
+ --superficie: #1e293b;
+ --borde-campo: #94a3b8;
+ --campo-fondo: #0f172a;
+ --boton-sec-fondo: #334155;
+ --boton-sec-texto: #f1f5f9;
+ --foco: #fbbf24;
+ color-scheme: dark;
+}
+
+body {
+ margin: 0;
+ font-family: Arial, sans-serif;
+ background: #f1f5f9;
+ color: #172033;
+}
+
+.contenedor {
+ max-width: none;
+ min-height: 100vh;
+ margin: 0 auto;
+ padding: 24px;
+ background: var(--fondo);
+ color: var(--texto);
+}
+.contenedor > * { max-width: 1000px; margin-left: auto; margin-right: auto; }
+
+.columnas {
+ display: grid;
+ grid-template-columns: 1fr 1fr;
+ gap: 24px;
+ align-items: start;
+}
+.panel, .tarjeta {
+ background: var(--superficie);
+ border-radius: 16px;
+ padding: 24px;
+ box-shadow: 0 6px 20px #17203312;
+}
+label {
+ display: block;
+ margin: 16px 0 6px;
+ font-weight: bold;
+}
+input, textarea, select, button {
+ font: inherit;
+}
+input, textarea, select {
+ width: 100%;
+ padding: 10px;
+ border: 1px solid var(--borde-campo);
+ border-radius: 8px;
+ background: var(--campo-fondo);
+ color: var(--texto);
+}
+input[type="color"] {
+ height: 46px;
+ padding: 4px;
+}
+/* Casilla de disponibilidad */
+.casilla {
+ display: flex;
+ align-items: center;
+ gap: 10px;
+}
+.casilla input[type="checkbox"] {
+ width: 22px;
+ height: 22px;
+ margin: 0;
+ padding: 0;
+ border: 0;
+ background: transparent;
+ accent-color: #1e40af;
+}
+.contador {
+ margin: 6px 0 0;
+ font-size: .9rem;
+ text-align: right;
+}
+button {
+ display: block;
+ width: 100%;
+ margin-top: 16px;
+ padding: 12px;
+ border: 0;
+ border-radius: 8px;
+ background: #1e40af;
+ color: white;
+ cursor: pointer;
+}
+.secundario, .tema {
+ background: var(--boton-sec-fondo);
+ color: var(--boton-sec-texto);
+}
+.tema {
+ max-width: 260px;
+ margin-top: 0;
+ margin-bottom: 20px;
+ margin-left: auto;
+ margin-right: auto;
+}
+:focus-visible {
+ outline: 3px solid var(--foco);
+ outline-offset: 3px;
+}
+.tarjeta {
+ border: 5px solid;
+ overflow-wrap: anywhere;
+}
+.tarjeta h3 {
+ font-size: 1.7rem;
+ margin-bottom: 8px;
+}
+.etiqueta { font-size: .85rem; }
+.carrera { font-weight: bold; }
+.semestre { margin-top: 0; font-style: italic; }
+.descripcion { white-space: pre-line; }
+.estado { font-weight: bold; }
+@media (max-width: 700px) {
+ .columnas { grid-template-columns: 1fr; }
+ .contenedor { padding: 16px; }
+}

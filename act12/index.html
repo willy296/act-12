@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi tarjeta con Vue</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <main class="contenedor" :class="{ oscuro: temaOscuro }">
+        <h1>Mi tarjeta de presentación</h1>
+        <p>Edita tus datos y observa la vista previa.</p>
+
+        <!-- Desafío opcional: tema oscuro -->
+        <button type="button" class="tema" @click="alternarTema" :aria-pressed="temaOscuro">
+            {{ temaOscuro ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro' }}
+        </button>
+
+        <div class="columnas">
+            <section class="panel" aria-labelledby="editor">
+                <h2 id="editor">Personaliza tu tarjeta</h2>
+                <label for="nombre">Nombre</label>
+                <input id="nombre" v-model.trim="nombre" maxlength="60">
+                <label for="carrera">Carrera</label>
+                <input id="carrera" v-model.trim="carrera" maxlength="80">
+
+                <!-- Reto A: semestre -->
+                <label for="semestre">Semestre</label>
+                <select id="semestre" v-model="semestre">
+                    <option value="1.er semestre">1.er semestre</option>
+                    <option value="2.º semestre">2.º semestre</option>
+                    <option value="3.er semestre">3.er semestre</option>
+                    <option value="4.º semestre">4.º semestre</option>
+                    <option value="5.º semestre">5.º semestre</option>
+                    <option value="6.º semestre">6.º semestre</option>
+                </select>
+
+                <label for="descripcion">Descripción</label>
+                <textarea id="descripcion" v-model.trim="descripcion" rows="4" maxlength="160"></textarea>
+                <!-- Reto B: contador -->
+                <p class="contador" aria-live="polite">
+                    {{ descripcion.length }} / 160
+                </p>
+
+                <label for="correo">Correo de contacto</label>
+                <input id="correo" type="email" v-model.trim="correo">
+                <label for="color">Color del borde</label>
+                <input id="color" type="color" v-model="color">
+
+                <!-- Reto C: disponibilidad -->
+                <label for="disponible" class="casilla">
+                    <input id="disponible" type="checkbox" v-model="disponible">
+                    Disponible para colaborar
+                </label>
+
+                <button type="button" @click="alternarContacto" :aria-expanded="mostrarContacto"
+                    aria-controls="contacto">
+                    {{ mostrarContacto
+                    ? 'Ocultar contacto' : 'Mostrar contacto' }}
+                </button>
+                <button type="button" class="secundario" @click="restablecer">
+                    Restablecer datos
+                </button>
+            </section>
+            <section aria-labelledby="vista">
+                <h2 id="vista">Vista previa</h2>
+                <article class="tarjeta" :style="{ borderColor: color }">
+                    <span class="etiqueta">Perfil estudiantil</span>
+                    <h3>{{ nombre || 'Tu nombre' }}</h3>
+                    <p class="carrera">
+                        {{ carrera || 'Tu carrera' }}
+                    </p>
+                    <p class="semestre">{{ semestre }}</p>
+                    <p class="descripcion">
+                        {{ descripcion || 'Escribe una presentación.' }}
+                    </p>
+                    <p class="estado">
+                        <span v-if="disponible">✔ Disponible para colaborar</span>
+                        <span v-else>✖ No disponible por ahora</span>
+                    </p>
+                    <div id="contacto">
+                        <p v-if="mostrarContacto">
+                            Contacto: {{ correo || 'Sin correo' }}
+                        </p>
+                    </div>
+                </article>
+            </section>
+        </div>
+        </main>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
